@@ -8,7 +8,7 @@ import visual
 
 def main():
     tui.display_title()
-    data=process.load_data("data/disneyland review.csv")
+    data = process.load_data("data/disneyland_reviews.csv")
     tui.display_data_loaded(len(data))
 
     keep_running = True
@@ -26,4 +26,5 @@ def main():
             tui.display_invalid_choice()
 if __name__ == "__main__":
     main()
+
 
