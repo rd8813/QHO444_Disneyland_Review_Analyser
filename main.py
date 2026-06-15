@@ -13,13 +13,13 @@ def main():
 
     keep_running = True
     while keep_running:
-        choice=tui.get_main_menu_choice()
+        choice = tui.get_main_menu_choice()
 
-        if choice=="A":
+        if choice =="A":
             tui.display_view_data_menu()
-        elif choice=="B":
+        elif choice =="B":
             tui.display_visualise_data_menu()
-        elif choice=="X":
+        elif choice =="X":
             tui.display_exit_message()
             keep_running=False
         else:
