@@ -15,3 +15,12 @@ def load_data(file_path):
             data.append(row)
 
     return data
+
+def get_reviews_by_park(data, park):
+    reviews = []
+
+    for row in data:
+        if row["Branch"] == park:
+            reviews.append(row)
+
+    return reviews

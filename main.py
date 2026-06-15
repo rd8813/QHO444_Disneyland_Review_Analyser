@@ -7,12 +7,36 @@ import tui
 import visual
 
 
-def handle_view_data_menu():
+def handle_view_data_menu(data):
     tui.display_view_data_menu()
     view_choice = input("Enter choice: ").upper()
 
     if view_choice == "A":
-        print("You selected: Display reviews by park")
+
+        print("\nChoose a park:")
+        print("1 - Disneyland_HongKong")
+        print("2 - Disneyland_Paris")
+        print("3 - Disneyland_California")
+
+        park_choice = input("Enter choice: ")
+
+        if park_choice == "1":
+            park = "Disneyland_HongKong"
+        elif park_choice == "2":
+            park = "Disneyland_Paris"
+        elif park_choice == "3":
+            park = "Disneyland_California"
+        else:
+            print("Invalid park choice")
+            return
+
+        reviews = process.get_reviews_by_park(data, park)
+
+        print(f"\nFound {len(reviews)} reviews")
+
+        for review in reviews[:5]:
+            print(review)
+
     elif view_choice == "B":
         print("You selected: Display number of reviews by park and location")
     elif view_choice == "C":
@@ -34,7 +58,7 @@ def main():
         choice = tui.get_main_menu_choice()
 
         if choice == "A":
-            handle_view_data_menu()
+            handle_view_data_menu(data)
         elif choice == "B":
             tui.display_visualise_data_menu()
         elif choice == "X":
