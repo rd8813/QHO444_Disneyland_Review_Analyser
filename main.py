@@ -37,8 +37,20 @@ def handle_view_data_menu(data):
         for review in reviews[:5]:
             print(review)
 
+
     elif view_choice == "B":
-        print("You selected: Display number of reviews by park and location")
+
+        location = input("Enter reviewer location: ")
+
+        count = 0
+
+        for row in data:
+
+            if row["Reviewer_Location"].lower() == location.lower():
+                count += 1
+
+        print(f"There are {count} reviews from {location}.")
+
     elif view_choice == "C":
         print("You selected: Display average score by park and year")
     elif view_choice == "X":
