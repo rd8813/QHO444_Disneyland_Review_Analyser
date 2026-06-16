@@ -51,10 +51,52 @@ def handle_view_data_menu(data):
 
         print(f"There are {count} reviews from {location}.")
 
+
     elif view_choice == "C":
-        print("You selected: Display average score by park and year")
+
+        print("\nChoose a park:")
+
+        print("1 - Disneyland_HongKong")
+
+        print("2 - Disneyland_Paris")
+
+        print("3 - Disneyland_California")
+
+        park_choice = input("Enter choice: ")
+
+        if park_choice == "1":
+
+            park = "Disneyland_HongKong"
+
+        elif park_choice == "2":
+
+            park = "Disneyland_Paris"
+
+        elif park_choice == "3":
+
+            park = "Disneyland_California"
+
+        else:
+
+            print("Invalid park choice")
+
+            return
+
+        year = input("Enter year: ")
+
+        average = process.get_average_rating_by_park_and_year(data, park, year)
+
+        if average == 0:
+
+            print("No reviews found for that park and year.")
+
+        else:
+
+            print(f"The average rating for {park} in {year} is {average:.2f}")
+
     elif view_choice == "X":
         print("Returning to main menu")
+
     else:
         tui.display_invalid_choice()
 
