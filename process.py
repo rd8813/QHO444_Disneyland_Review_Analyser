@@ -95,3 +95,30 @@ def get_monthly_average_ratings(data, park):
         averages.append(avg)
 
     return averages
+
+def get_average_score_by_park_and_location(data):
+    results = {}
+
+    for row in data:
+        park = row["Branch"]
+        location = row["Reviewer_Location"]
+        rating = int(row["Rating"])
+
+        if park not in results:
+            results[park] = {}
+
+        if location not in results[park]:
+            results[park][location] = []
+
+        results[park][location].append(rating)
+
+    averages = {}
+
+    for park, locations in results.items():
+        averages[park] = {}
+
+        for location, ratings in locations.items():
+            average = sum(ratings) / len(ratings)
+            averages[park][location] = average
+
+    return averages

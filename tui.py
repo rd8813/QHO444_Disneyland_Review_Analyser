@@ -25,6 +25,7 @@ def display_view_data_menu():
     print("[A] Display reviews by park")
     print("[B] Display number of reviews by park and location")
     print("[C] Display average score by park and year")
+    print("[D] Display average score per park by reviewer location")
     print("[X] Return to Main Menu")
 
 

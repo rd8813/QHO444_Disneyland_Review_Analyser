@@ -73,6 +73,16 @@ def handle_view_data_menu(data):
         else:
             print(f"The average rating for {park} in {year} is {average:.2f}")
 
+    elif view_choice == "D":
+        results = process.get_average_score_by_park_and_location(data)
+
+        for park, locations in results.items():
+            print(f"\n{park}")
+            print("-" * len(park))
+
+            for location, average in locations.items():
+                print(f"{location}: {average:.2f}")
+
     elif view_choice == "X":
         print("Returning to main menu")
 
