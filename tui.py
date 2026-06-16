@@ -29,10 +29,10 @@ def display_view_data_menu():
 
 
 def display_visualise_data_menu():
-    print("\nVisualise Data Menu")
-    print("[A] Graph reviews by park")
-    print("[B] Graph average scores")
-    print("[X] Return to Main Menu")
+    print("\nPlease enter one of the following options:")
+    print("[A] Most reviewed Parks")
+    print("[B] Park Ranking by Nationality")
+    print("[C] Most Popular Month by Park")
 
 
 def display_invalid_choice():
