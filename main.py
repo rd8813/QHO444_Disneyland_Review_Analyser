@@ -7,26 +7,56 @@ import tui
 import visual
 
 
+def choose_park():
+    print("\nChoose a park:")
+    print("1 - Disneyland_HongKong")
+    print("2 - Disneyland_Paris")
+    print("3 - Disneyland_California")
+
+    park_choice = input("Enter choice: ")
+
+    if park_choice == "1":
+        return "Disneyland_HongKong"
+    elif park_choice == "2":
+        return "Disneyland_Paris"
+    elif park_choice == "3":
+        return "Disneyland_California"
+    else:
+        print("Invalid park choice")
+        return None
+
+
+def choose_location(data):
+    locations = sorted(set(row["Reviewer_Location"] for row in data))
+
+    print("\nAvailable Reviewer Locations:")
+    print("-" * 30)
+
+    for i, location in enumerate(locations, start=1):
+        print(f"{i}. {location}")
+
+    try:
+        location_choice = int(input("\nSelect a location number: "))
+
+        if location_choice < 1 or location_choice > len(locations):
+            print("Invalid location choice")
+            return None
+
+        return locations[location_choice - 1]
+
+    except ValueError:
+        print("Please enter a valid number.")
+        return None
+
+
 def handle_view_data_menu(data):
     tui.display_view_data_menu()
     view_choice = input("Enter choice: ").upper()
 
     if view_choice == "A":
-        print("\nChoose a park:")
-        print("1 - Disneyland_HongKong")
-        print("2 - Disneyland_Paris")
-        print("3 - Disneyland_California")
+        park = choose_park()
 
-        park_choice = input("Enter choice: ")
-
-        if park_choice == "1":
-            park = "Disneyland_HongKong"
-        elif park_choice == "2":
-            park = "Disneyland_Paris"
-        elif park_choice == "3":
-            park = "Disneyland_California"
-        else:
-            print("Invalid park choice")
+        if park is None:
             return
 
         reviews = process.get_reviews_by_park(data, park)
@@ -37,32 +67,23 @@ def handle_view_data_menu(data):
             print(review)
 
     elif view_choice == "B":
-        location = input("Enter reviewer location: ")
+        location = choose_location(data)
+
+        if location is None:
+            return
 
         count = 0
 
         for row in data:
-            if row["Reviewer_Location"].lower() == location.lower():
+            if row["Reviewer_Location"] == location:
                 count += 1
 
-        print(f"There are {count} reviews from {location}.")
+        print(f"\nThere are {count} reviews from {location}.")
 
     elif view_choice == "C":
-        print("\nChoose a park:")
-        print("1 - Disneyland_HongKong")
-        print("2 - Disneyland_Paris")
-        print("3 - Disneyland_California")
+        park = choose_park()
 
-        park_choice = input("Enter choice: ")
-
-        if park_choice == "1":
-            park = "Disneyland_HongKong"
-        elif park_choice == "2":
-            park = "Disneyland_Paris"
-        elif park_choice == "3":
-            park = "Disneyland_California"
-        else:
-            print("Invalid park choice")
+        if park is None:
             return
 
         year = input("Enter year: ")
@@ -98,7 +119,10 @@ def handle_visualise_data_menu(data):
         visual.show_reviews_by_park_chart(data)
 
     elif visual_choice == "B":
-        park = input("Enter park: ")
+        park = choose_park()
+
+        if park is None:
+            return
 
         results = process.get_top_locations_by_rating(data, park)
 
@@ -112,7 +136,10 @@ def handle_visualise_data_menu(data):
         visual.show_top_locations_chart(locations, ratings, park)
 
     elif visual_choice == "C":
-        park = input("Enter park: ")
+        park = choose_park()
+
+        if park is None:
+            return
 
         ratings = process.get_monthly_average_ratings(data, park)
 
